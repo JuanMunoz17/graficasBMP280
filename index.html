@@ -24,7 +24,19 @@
       
     
       <script>
-    
+   
+   
+        function getToday(){
+            return new Date().toLocaleDateString("es-ES", {
+                timeZone: 'America/Bogota',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            });
+        }
+          
+
         anychart.onDocumentReady(function () {
           // create data set on our data
           var dataSet = anychart.data.set(getData());
@@ -50,10 +62,10 @@
           // turn on the crosshair
           var crosshair = chart.crosshair();
           crosshair.enabled(true).yLabel(false).yStroke(null).xStroke('#fff');
-    
+   
           // set chart title text settings
           chart.title(
-            'Company Profit Trends in Census Bureau-designated regions'
+            "Valores globales del BMP280 del día " + getToday() 
           );
     
           // set interactivity and tooltips settings
@@ -61,10 +73,7 @@
           chart.tooltip().displayMode('union');
     
           // set Y axis title
-          chart.yAxis(0).title('Profit');
-    
-          // set custom formatter for Y axis labels
-          chart.yAxis(0).labels().format('{%Value}k.');
+          chart.yAxis(0).title('Valores');    
     
           // create additional xAxis to place category labels on top
           chart.xAxis(1).orientation('top');
@@ -72,12 +81,14 @@
           // create additional xAxis to place category labels on top
           chart.yAxis(1).orientation('right').labels(false);
     
-          chart.tooltip().format('{%SeriesName}: {%Value}k');
+        //   chart.tooltip().format('{%SeriesName}: {%Value}k');
     
           // helper function to setup label settings for all series
-          var setupSeries = function (series, name) {
+          var setupSeries = function (series, name, format) {
             series.name(name);
             series.markers().zIndex(100);
+            // establecer un label
+            series.tooltip().enabled(true).format(`${name}: {%Value} ${format}.`);
             series
               .hovered()
               .markers()
@@ -85,6 +96,7 @@
               .type('circle')
               .size(4)
               .stroke('1.5 #fff');
+              
           };
     
           // temp variable to store series instance
@@ -92,19 +104,16 @@
     
           // create first series with mapped data
           series = chart.area(firstSeriesData);
-          setupSeries(series, 'Northeast');
+          setupSeries(series, 'Temperatura', "°C");
     
           // create second series with mapped data
           series = chart.area(secondSeriesData);
-          setupSeries(series, 'Midwest');
+          setupSeries(series, 'Presión atmosferica', "hPa");
     
           // create third series with mapped data
           series = chart.area(thirdSeriesData);
-          setupSeries(series, 'South');
-    
-          // create fourth series with mapped data
-          series = chart.area(fourthSeriesData);
-          setupSeries(series, 'West');
+          setupSeries(series, 'Altitud', "m");
+
     
           // turn on legend
           chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
@@ -122,26 +131,26 @@
     
         function getData() {
           return [
-            ['1996', 322, 242, 142, 162],
-            ['1997', 324, 254, 154, 90],
-            ['1998', 329, 226, 126, 50],
-            ['1999', 342, 232, 132, 77],
-            ['2000', 348, 268, 168, 35],
-            ['2001', 334, 254, 154, -45],
-            ['2002', 325, 235, 135, -88],
-            ['2003', 316, 266, 166, -120],
-            ['2004', 318, 288, 188, -156],
-            ['2005', 330, 220, 120, -123],
-            ['2006', 355, 215, 115, -88],
-            ['2007', 366, 236, 136, -66],
-            ['2008', 337, 247, 147, -45],
-            ['2009', 352, 172, 72, -29],
-            ['2010', 377, 37, 7, -45],
-            ['2011', 383, 23, 3, -88],
-            ['2012', 344, 34, 4, -132],
-            ['2013', 366, 46, 6, -146],
-            ['2014', 389, 59, 9, -169],
-            ['2015', 334, 44, 4, -184]
+            ['14:01', 322, 242, 142],
+            ['14:02', 324, 254, 154],
+            ['14:03', 329, 226, 126],
+            ['14:04', 342, 232, 132],
+            ['14:05', 348, 268, 168],
+            ['14:06', 334, 254, 154],
+            ['14:07', 325, 235, 135],
+            ['14:08', 316, 266, 166],
+            ['14:09', 318, 288, 188],
+            ['14:10', 330, 220, 120],
+            ['14:11', 355, 215, 115],
+            ['14:12', 366, 236, 136],
+            ['14:13', 337, 247, 147],
+            ['14:14', 352, 172, 240],
+            ['14:15', 377, 37, 73],
+            ['14:16', 383, 23, 33],
+            ['14:17', 344, 34, 43],
+            ['14:18', 366, 46, 63],
+            ['14:19', 389, 59, 93],
+            ['14:20', 334, 44, 43]
           ];
         }
       
