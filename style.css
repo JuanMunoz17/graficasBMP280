@@ -3,23 +3,22 @@
   margin: 0 !important;
 }
 
-.col{
+.img{
+  padding: 5px !important;
+  width: 40%;
+  height: auto;
 }
 
 .box{
   height: 33.3vh;
-  background: #D26;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
-  background-color: yellow;
 }
 
 .info{
   height: 25vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
   background-color: rgb(30, 138, 20);
 }
 
@@ -27,13 +26,17 @@
   height: 50vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
 }
 
 .hPresion{
-  background-color: #D26;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
   background-color: yellow;
+}
+
+.centerInfo{
+  /* Center div */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
