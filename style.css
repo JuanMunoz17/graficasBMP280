@@ -10,7 +10,7 @@
 }
 
 .box{
-  height: 33.3vh;
+  height: 33.35vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
 }
@@ -19,7 +19,6 @@
   height: 25vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
-  background-color: rgb(30, 138, 20);
 }
 
 .graphall{
