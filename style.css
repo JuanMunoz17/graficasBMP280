@@ -39,3 +39,20 @@
   justify-content: center;
   align-items: center;
 }
+
+.icono-luz {
+  width: 30px;
+  height: 30px;
+  background-color: #ff0000; /* Color de la luz */
+  border-radius: 50%; /* Hace el div circular */
+  animation: cambioEstado 1.5s infinite; /* Aplica la animación */
+}
+
+.prendido {
+  background-color: #00ff00; /* Cambia el color de la luz */
+}
+
+@keyframes cambioEstado {
+  50% { opacity: 0; } /* Se vuelve transparente al medio de la animación */
+  100% { opacity: 1; } /* Termina completamente visible */
+}
