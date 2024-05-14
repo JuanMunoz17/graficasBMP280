@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="./index.js"></script>
     </head>
     <body>
 
@@ -51,8 +52,8 @@
                     <section class="d-flex">
                       <i class="fa-solid fa-temperature-three-quarters fa-beat fa-3x" style="color: #FA5421;"></i>
                       &nbsp;
-                      <h1>
-                         30°C
+                      <h1 id="last-temperature-value">
+                         120°C
                       </h1>
                     </section>
                   </div>
@@ -66,7 +67,7 @@
                     <section class="d-flex">
                       <i class="fa-solid fa-wind fa-beat fa-3x" style="color: #74C0FC;"></i>
                       &nbsp;
-                      <h1>
+                      <h1 id="last-pressure-value">
                          30hPA
                       </h1>
                     </section>
@@ -81,15 +82,16 @@
                     <section class="d-flex">
                       <i class="fa-solid fa-ruler fa-beat fa-3x" style="color: #B197FC;"></i>
                       &nbsp;
-                      <h1>
+                      <h1 id="last-altitude-value">
                          30m
                       </h1>
                     </section>
                   </div>
                 </section>
               </div>
-              <section class="graphall">
-                <div id="container"></div>
+              <section class="graphall row">
+                <div id="container2" class="col-6"></div>
+                <div id="container" class="col-6"></div>
               </section>
               <div class="row">
                 <section class="col info centerInfo">
@@ -98,11 +100,11 @@
                       Estado del sensor
                     </h3>
                     <div style="height: 5px;"></div>
-                    <section class="d-flex centerInfo">
-                      <div class="icono-luz prendido"></div>
+                    <section class="d-flex centerInfo" id="sensor-status">
+                      <div class="icono-luz"></div>
                       &nbsp;
                       <h5>
-                         ACTIVO
+                         INACTIVO
                       </h3>
                     </section>
                   </div>
@@ -113,7 +115,7 @@
                       Estado de la API
                     </h3>
                     <div style="height: 5px;"></div>
-                    <section class="d-flex centerInfo">
+                    <section class="d-flex centerInfo" id="api-status">
                       <div class="icono-luz"></div>
                       &nbsp;
                       <h5>
@@ -130,118 +132,7 @@
           <!-- <section class="col hPresion">
             Gráfica de presión
           </section> -->
-
-        </div>
-      </main>
-      
-      
-    
-      <script>
-   
-        function getToday(){
-            return new Date().toLocaleDateString("es-ES", {
-                timeZone: 'America/Bogota',
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
-        } 
-
-        anychart.onDocumentReady(function () {
-          // create data set on our data
-          var dataSet = anychart.data.set(getData());
-          
-          // create area chart
-          var chart = anychart.area();
-    
-          // turn on chart animation
-          // chart.animation(true);
-   
-          // set chart title text settings
-          chart.title(
-            "Valores globales del día " + getToday() 
-          );
-        
-          // set Y axis title
-          chart.yAxis(0).title('Valores');    
-    
-          // create additional xAxis to place category labels on top
-          chart.xAxis(1).orientation('top');
-    
-          // create additional xAxis to place category labels on top
-          chart.yAxis(1).orientation('right').labels(false);
-    
-    
-          // helper function to setup label settings for all series
-          var setupSeries = function (series, name, format) {
-            series.name(name);
-            series.markers().zIndex(100);
-            // establecer un label
-            series.tooltip().enabled(true).format(`${name}: {%Value} ${format}.`);
-            series
-              .hovered()
-              .markers()
-              .enabled(true)
-              .type('circle')
-              .size(4)
-              .stroke('1.5 #fff');
-          };
-    
-          // temp variable to store series instance
-          var series;
-
-          function createSeries(...args){
-            // args es un {} con {nombre: str, formato: str}
-            let i = 1;
-            args.forEach((arg) => {
-              const series = chart.area(dataSet.mapAs({ x: 0, value: i }));
-              setupSeries(series, arg.nombre, arg.formato);
-              i++;
-            })
-          }
-
-          createSeries(
-            {nombre: 'Temperatura', formato: '°C'},
-            {nombre: 'Presión atmosferica', formato: 'hPa'},
-            {nombre: 'Altitud', formato: 'm'}
-          )
-          
-          // turn on legend
-          chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
-    
-          // set container id for the chart
-          chart.container('container');
-    
-          // initiate chart drawing
-          chart.draw();
-        });
-    
-        function getData() {
-          return [
-            ['14:01', 322, 242, 142],
-            ['14:02', 324, 254, 154],
-            ['14:03', 329, 226, 126],
-            ['14:04', 342, 232, 132],
-            ['14:05', 348, 268, 168],
-            ['14:06', 334, 254, 154],
-            ['14:07', 325, 235, 135],
-            ['14:08', 316, 266, 166],
-            ['14:09', 318, 288, 188],
-            ['14:10', 330, 220, 120],
-            ['14:11', 355, 215, 115],
-            ['14:12', 366, 236, 136],
-            ['14:13', 337, 247, 147],
-            ['14:14', 352, 172, 240],
-            ['14:15', 377, 37, 73],
-            ['14:16', 383, 23, 33],
-            ['14:17', 344, 34, 43],
-            ['14:18', 366, 46, 63],
-            ['14:19', 389, 59, 93],
-            ['14:20', 334, 44, 43]
-          ];
-        }
-      
+  
     </script>
     </body>
     </html>
