@@ -15,6 +15,12 @@
   border-color: hsla(0, 0%, 0%, 0.5);
 }
 
+.box2{
+  height: 66.7vh;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+}
+
 .info{
   height: 25vh;
   border: 2px solid #333;

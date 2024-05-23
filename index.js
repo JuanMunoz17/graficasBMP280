@@ -12,7 +12,7 @@ function setStatus(status, idElement){
 }
 
 function updateHealthStatus() {
-  fetch('http://localhost:1987/health')
+  fetch('http://20.200.125.40:1987/health')
     .then(response => {
       setStatus(true, 'api-status')
       return response.json();
@@ -27,7 +27,7 @@ function updateHealthStatus() {
 }
 
 function updateLastInfo(){
-  fetch('http://localhost:1987/lastinfo')
+  fetch('http://20.200.125.40:1987/lastinfo')
   .then(response => {return response.json()})
   .then(data => {
     document.getElementById('last-temperature-value').textContent = data.temperatura + '°C';
@@ -45,8 +45,8 @@ function updateGlobal(){
 setInterval(updateGlobal, 1000);
 
 function updateGraph(){
-  const limit_data = 5;
-  fetch(`http://localhost:1987/datos?limit=${limit_data}`)
+  const limit_data = 100;
+  fetch(`http://20.200.125.40:1987/datos?limit=${limit_data}`)
   .then(response => {return response.json()})
   .then(data => {
     updateGraphWithData(data)
