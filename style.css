@@ -13,24 +13,28 @@
   height: 33.35vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
+  overflow: auto;
 }
 
 .box2{
   height: 66.7vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
+  overflow: auto;
 }
 
 .info{
   height: 25vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
+  overflow: auto;
 }
 
 .graphall{
   height: 50vh;
   border: 2px solid #333;
   border-color: hsla(0, 0%, 0%, 0.5);
+  overflow: auto;
 }
 
 .hPresion{
